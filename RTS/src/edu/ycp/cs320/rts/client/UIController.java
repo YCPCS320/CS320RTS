@@ -77,7 +77,7 @@ public class UIController {
 			if(this.selectedObject.getOwner()!=this.targetObject.getOwner()){//if objects are not of the same owner
 				if(targetObject instanceof Attackable&&this.selectedObject instanceof CanAttack){
 					//GIVE ATTACK ORDER
-					GWT.log("Attack order received by object id:" + selectedObject.getId() + " on object id:" + targetObject.getId() + ".");
+					GWT.log("Attack order received by object id:" + selectedObject.getId() + ".");
 					return 1;
 				}
 				else{

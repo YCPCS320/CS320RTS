@@ -91,6 +91,10 @@ public class RTS implements EntryPoint {
 		view.setCombatantSprite(combatantSprite);
 		view.setStructureSprite(structureSprite);
 		view.setTurretSprite(turretSprite);
+			
+		//start getting game states
+		 updateGameState();
+		
 		
 		GetBoardServiceAsync boardservice = (GetBoardServiceAsync) GWT.create(GetBoardService.class);
 		
@@ -106,14 +110,7 @@ public class RTS implements EntryPoint {
 			public void onSuccess(GameState result) {
 				//GWT.log("Success");
 				GameState newstate =(GameState) result;
-				
-				if(newstate == null){
-					GWT.log("the gamestate was not updated");
-				}
-				else{
-					view.setGameList(newstate.getGameobjects());
-				}
-				
+				view.setGameList(newstate.getGameobjects());
 				
 			}
 		};
@@ -123,15 +120,6 @@ public class RTS implements EntryPoint {
 		view.activate();
 		
 		
-		this.updateTimer = new Timer() {
-
-			@Override
-			public void run() {
-				updateGameState();
-			}
-		};
-		
-		updateTimer.scheduleRepeating(1100);
 		
 	}
 	public void setOwnerID(int id){
@@ -139,6 +127,7 @@ public class RTS implements EntryPoint {
 	}
 	public void updateGameState(){
 		GetBoardServiceAsync boardservice = (GetBoardServiceAsync) GWT.create(GetBoardService.class);
+		GWT.log("sent");
 		
 		AsyncCallback<GameState> callback = new AsyncCallback<GameState>() {
 
@@ -146,24 +135,17 @@ public class RTS implements EntryPoint {
 			public void onFailure(Throwable caught) {
 				// TODO Auto-generated method stub
 				GWT.log("failed "+ caught.getMessage());
-				
+				updateGameState();
+		
 			}
 
 			@Override
 			public void onSuccess(GameState result) {
-				//GWT.log("Success");
+				GWT.log("Success");
 				GameState newstate =(GameState) result;
-				
-				if(result == null){
-					GWT.log("the gamestate was not updated");
-				}
-				else{
-					view.setGameList(newstate.getGameobjects());
-				}
-				
-				if (state != null) {
-					state = result;
-				}
+				view.setGameList(newstate.getGameobjects());
+				state = result;
+				updateGameState();
 				
 			}
 		};

@@ -1,5 +1,4 @@
 /test-classes
 /.gwt
 /gwt-unitCache
-/.DS_Store
-/userdata.db
+/bin

@@ -38,12 +38,12 @@ public class MoveRequest extends Request implements Serializable{
 	public int getUnitId() {
 		return unitId;
 	}
-//	/**
-//	 * @param unitId the unitId to set
-//	 */
-//	public void setUnitId(int unitId) {
-//		this.unitId = unitId;
-//	}
+	/**
+	 * @param unitId the unitId to set
+	 */
+	public void setUnitId(int unitId) {
+		this.unitId = unitId;
+	}
 
 	/**
 	 * @return the newWaypoint
@@ -51,12 +51,12 @@ public class MoveRequest extends Request implements Serializable{
 	public Point getNewWaypoint() {
 		return newWaypoint;
 	}
-//	/**
-//	 * @param newWaypoint the newWaypoint to set
-//	 */
-//	public void setNewWaypoint(Point newWaypoint) {
-//		this.newWaypoint = newWaypoint;
-//	}
+	/**
+	 * @param newWaypoint the newWaypoint to set
+	 */
+	public void setNewWaypoint(Point newWaypoint) {
+		this.newWaypoint = newWaypoint;
+	}
 	
 	
 	

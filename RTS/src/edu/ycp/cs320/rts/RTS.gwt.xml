@@ -20,7 +20,7 @@
   <!-- Other module inherits                                      -->
 
   <!-- Specify the app entry point class.                         -->
-  <entry-point class='edu.ycp.cs320.rts.client.Loginscreen'/>
+  <entry-point class='edu.ycp.cs320.rts.client.RTS'/>
 
   <!-- Specify the paths for translatable code                    -->
   <source path='client'/>
