@@ -54,7 +54,6 @@ public class Loginscreen implements EntryPoint {
 
 			@Override
 			public void onSuccess(Boolean result) {
-				GWT.log("Action Success");
 				if(result){
 					GWT.log("Action returned true");
 				}
@@ -63,18 +62,6 @@ public class Loginscreen implements EntryPoint {
 			
 		};
 		
-		//boardservice.newuser("dmashuda", "abc123", "dmashuda@ycp.edu", callbackcreate);
-		
-		Timer t = new Timer() {
-			
-			@Override
-			public void run() {
-				boardservice.login("dmashuda", "ab123", callbacklogin);
-				
-			}
-		};
-		
-		//t.scheduleRepeating(1000);
 		
 
 		final TextBox usernamebox = new TextBox();
@@ -155,7 +142,6 @@ public class Loginscreen implements EntryPoint {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				// TODO Auto-generated method stub
 				boardservice.login(usernamebox.getText().toString(), passwordbox.getText().toString(), callbacklogin);
 				
 			}
