@@ -72,7 +72,7 @@ public class ClientChannel {
 	 */
 	public void postUpdate(GameState gameState) {
 		if (!updateQueue.offer(gameState)) {
-			System.out.println("Offering updated game state, but client hasn't retrieved the previous one?");
+			//System.out.println("Offering updated game state, but client hasn't retrieved the previous one?");
 		}
 	}
 

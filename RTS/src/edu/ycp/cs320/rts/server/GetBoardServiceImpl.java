@@ -53,29 +53,18 @@ public class GetBoardServiceImpl extends RemoteServiceServlet implements GetBoar
 		String username = (String)getThreadLocalRequest().getSession().getAttribute("username");
 		if(username == null){
 			//this should return null when login features are complete 
+			System.out.println("There is a user trying to exchange gamestates without being logged in");
+		}		
+		else{
+			System.out.printf("%s \n \n \n",  username);
+
 		}
-		GetGamestate controller = new GetGamestate();
-		//state = controller.getGameState();
-		
-		int i = (int) (Math.random() * 9);
-		int j = (int) (Math.random() * 9);
-		//System.out.println(i);
-		
-		int id = new Integer(""+ System.currentTimeMillis() % 1000000);
-		
-		Structure test = new Structure(id, 1, new Point(50*i, 50*j), new Point(
-				128, 128), 1, 100);
-		test.setImageName("structureSprite.png");
-		
 		if(state != null){
-			state.getGameobjects().add(test);
-			state.addBuildRequest(new BuildRequest(1, new Point(2,2)));
+			
 		}
 		else{
 			System.out.println("The game state is null");
 		}
-		
-		
 		
 		
 		state = channel.update(state);
@@ -93,7 +82,7 @@ public class GetBoardServiceImpl extends RemoteServiceServlet implements GetBoar
 			return false;
 			
 		}
-		getThreadLocalRequest().setAttribute("username", user);
+		getThreadLocalRequest().getSession().setAttribute("username", user);
 		return true;
 	}
 

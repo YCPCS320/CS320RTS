@@ -38,7 +38,6 @@ public class GameView extends Composite {
 	private ArrayList<GameObject> list;
 	private Point mouseStart;
 	private UIController uIController; 
-	private int ownerID;
 
 	/**
 	 * Constructor.
@@ -128,9 +127,6 @@ public class GameView extends Composite {
 		this.list = list;
 	}
 	
-	public void setOwnerID(int id){
-		this.ownerID=id;
-	}
 	
 	
 	/**

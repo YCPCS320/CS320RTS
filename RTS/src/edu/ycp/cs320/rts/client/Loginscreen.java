@@ -34,10 +34,11 @@ public class Loginscreen implements EntryPoint {
 			public void onSuccess(Boolean result) {
 				
 				if(result){
-					GWT.log("Action returned true");
+					
+					Window.alert("User successfully created");
 					
 				}else{
-					GWT.log("Dang, user not created");
+					Window.alert("User Creation failed");
 				}
 				
 			}
@@ -50,12 +51,16 @@ public class Loginscreen implements EntryPoint {
 			public void onFailure(Throwable caught) {
 				GWT.log("action failed");
 				
+				
 			}
 
 			@Override
 			public void onSuccess(Boolean result) {
 				if(result){
-					GWT.log("Action returned true");
+					Window.alert("Login Successful");
+					RootPanel.get().clear();
+					RTS maingame = new RTS();
+					maingame.updateGameState();
 				}
 				
 			}
