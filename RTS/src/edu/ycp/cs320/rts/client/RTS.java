@@ -5,8 +5,10 @@ import java.util.TreeMap;
 
 import edu.ycp.cs320.rts.shared.GameObject;
 import edu.ycp.cs320.rts.shared.GameState;
+import edu.ycp.cs320.rts.shared.GameStateUpdater;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Image;
@@ -26,6 +28,7 @@ public class RTS {
 	private Image turretSprite;
 	private GameView view;
 	private GameState state;
+	private GameStateUpdater smoother;
 	
 	/**
 	 * 
@@ -55,7 +58,7 @@ public class RTS {
 		view = new GameView();
 
 		state = new GameState(new ArrayList<GameObject>(), new TreeMap<String, Integer>());
-
+		smoother = new GameStateUpdater(state);
 
 		view.setGameList(state.getGameobjects());
 
@@ -98,6 +101,15 @@ public class RTS {
 
 		boardservice.exchangeGameState(state, callback);
 		view.activate();
+		
+		 Timer t = new Timer() {
+		      @Override
+		      public void run() {
+		    	  smoother.updateState();
+		      }
+		    };
+		    
+		    t.scheduleRepeating(100);
 
 
 
@@ -132,6 +144,8 @@ public class RTS {
 
 
 		boardservice.exchangeGameState(state, callback);
+		
+	   
 
 	}
 

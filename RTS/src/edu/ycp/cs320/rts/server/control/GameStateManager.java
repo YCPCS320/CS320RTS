@@ -6,6 +6,7 @@ import java.util.List;
 import edu.ycp.cs320.rts.server.SharedGamestate;
 import edu.ycp.cs320.rts.shared.BuildRequest;
 import edu.ycp.cs320.rts.shared.GameState;
+import edu.ycp.cs320.rts.shared.GameStateUpdater;
 import edu.ycp.cs320.rts.shared.Request;
 
 /**
@@ -24,6 +25,12 @@ public class GameStateManager {
 	private class Worker implements Runnable {
 		@Override
 		public void run() {
+			GameStateUpdater gameupdater;
+			synchronized (lock) {
+				GetGamestate getState = new GetGamestate();
+				gameupdater = new GameStateUpdater(getState.getGameState());
+				
+			}
 			while (!shutdownRequested) {
 				try {
 					Thread.sleep(UPDATE_INTERVAL_MS);
@@ -45,6 +52,8 @@ public class GameStateManager {
 							//changer.addChangesToGameState(s);
 						}
 						
+						gameupdater.updateState();
+						
 						//TODO: handle change conflicts
 						
 						//TODO: turn changes requests into changes
@@ -55,7 +64,7 @@ public class GameStateManager {
 							GameState copy = sharedGameState.clone();
 							
 							channel.postUpdate(copy);
-							System.out.println("copy posted");
+							//System.out.println("copy posted");
 						}
 					}
 				} catch (InterruptedException e) {
