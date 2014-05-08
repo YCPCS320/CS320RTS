@@ -4,8 +4,10 @@ import java.util.ArrayList;
 
 import edu.ycp.cs320.rts.shared.AttackRequest;
 import edu.ycp.cs320.rts.shared.BuildRequest;
+import edu.ycp.cs320.rts.shared.Combatant;
 import edu.ycp.cs320.rts.shared.GameObject;
 import edu.ycp.cs320.rts.shared.GameState;
+import edu.ycp.cs320.rts.shared.Interactable;
 import edu.ycp.cs320.rts.shared.MoveRequest;
 import edu.ycp.cs320.rts.shared.Point;
 import edu.ycp.cs320.rts.shared.Structure;
@@ -40,48 +42,58 @@ public class HandleGameRequests {
 				for (GameObject o: masterGamestate.getGameobjects()) {
 					// Check if unitId exists on masterGamestate, if so add the way-point to it in master
 					if (o.getId() == id) {
-						masterGamestate.addMoveRequest(mr);		// Add request to master
-						//((Unit) o).addWaypoint(newWaypoint);	// Make changes directly
+						((Unit) o).addWaypoint(newWaypoint);	// Make changes directly
 					}	
 				}
 			}
 			
 			ArrayList<BuildRequest> buildRequests = slaveGamestates.get(i).getBuildRequests();
 			for (BuildRequest br: buildRequests) {
-				Structure structureToBuild = new Structure();
 				boolean validPos = true;
 				// Check if build location is valid in masterGamestate - no gameobject or resource at location
 				for (GameObject o: masterGamestate.getGameobjects()) {
 					if (o.getPosition().getX() == br.getBuildpoint().getX() && o.getPosition().getY() == br.getBuildpoint().getY()) {
-						validPos = false;	// If a gameObject is encountered at build location, request can not be fullfilled
+						validPos = false;	// If a gameObject is encountered at build location, request can not be fulfilled
 					}
 				}
 				if (validPos) {
-					masterGamestate.addBuildRequest(br);	// Add request to master
-					//masterGamestate.getGameobjects().add(structureToBuild);	// Make changes directly
+					int Userid = br.getUserId();
+					Point buildPoint = br.getBuildpoint();
+					int size = masterGamestate.getGameobjects().size();		// Get a new unique id
+					int id = size;
+					Combatant combatantToBuild = new Combatant(id, Userid, new Point(), buildPoint, 1,1,1,1,1,1);
+					masterGamestate.getGameobjects().add(combatantToBuild);	// Make changes directly
 				}
 			}
 			
 			ArrayList<AttackRequest> attackRequests = slaveGamestates.get(i).getAttackRequests();
-			ArrayList<AttackRequest> validAttackReq = new ArrayList<AttackRequest>();
 			for (AttackRequest ar: attackRequests) {
 				// Check if attacking unit and attacked unit both exist in masterGamestate
 				// if so, update the master by completing the attack
 				boolean a1 = false;
 				boolean a2 = false;
+				Combatant sourceUnit = new Combatant();
+				Interactable target = new Interactable();
 				for (GameObject o: masterGamestate.getGameobjects()) {
 					if (o.getId() == ar.getSourceUnit()) {
 						a1 = true;
+						sourceUnit = ((Combatant) o);
 					}
 					if (o.getId() == ar.getTargetUnit()) {
 						a2 = true;
+						target = ((Interactable) o);
 					}
 				}
 				if (a1 && a2) {
-					validAttackReq.add(ar);
+					long currenttime = System.currentTimeMillis();
+					sourceUnit.attack(target, currenttime);	// Issue the attack
+					for (GameObject o: masterGamestate.getGameobjects()) {
+						if (o.getId() == ar.getTargetUnit()) {	// Update the target unit in the masterGamestate
+							o = target;
+						}
+					}
 				}
 			}
-			masterGamestate.addAttackRequests(validAttackReq); 	// Add requests to master
 		}
 		
 		
