@@ -56,7 +56,7 @@ public class GetBoardServiceImpl extends RemoteServiceServlet implements GetBoar
 			System.out.println("There is a user trying to exchange gamestates without being logged in");
 		}		
 		else{
-			System.out.printf("%s \n \n \n",  username);
+			//System.out.printf("%s \n \n \n",  username);
 
 		}
 		if(state != null){

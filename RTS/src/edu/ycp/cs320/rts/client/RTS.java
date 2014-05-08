@@ -109,7 +109,7 @@ public class RTS {
 		      }
 		    };
 		    
-		    t.scheduleRepeating(100);
+		    //t.scheduleRepeating(100);
 
 
 
@@ -120,7 +120,7 @@ public class RTS {
 	 */
 	public void updateGameState(){
 		GetBoardServiceAsync boardservice = (GetBoardServiceAsync) GWT.create(GetBoardService.class);
-		GWT.log("sent");
+		//GWT.log("sent");
 
 		AsyncCallback<GameState> callback = new AsyncCallback<GameState>() {
 
@@ -133,11 +133,17 @@ public class RTS {
 
 			@Override
 			public void onSuccess(GameState result) {
-				GWT.log("Success");
+				//GWT.log("Success");
 				GameState newstate =(GameState) result;
 				view.setGameList(newstate.getGameobjects());
 				state = result;
 				updateGameState();
+				for(GameObject g: state.getGameobjects()){
+					/*
+					GWT.log("x:" + g.getPosition().getX());
+					GWT.log("y:" + g.getPosition().getY());
+					*/
+				}
 
 			}
 		};

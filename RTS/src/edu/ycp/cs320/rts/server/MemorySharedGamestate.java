@@ -25,6 +25,19 @@ public class MemorySharedGamestate implements ISharedGamestate{
 		testcom.addWaypoint(new Point(200, 200));
 		testcom.addWaypoint(new Point(0, 200));
 		testcom.addWaypoint(new Point(500, 200));
+		testcom.addWaypoint(new Point(500, 500));
+		testcom.addWaypoint(new Point(500, 200));
+		testcom.addWaypoint(new Point(500, 500));
+		testcom.addWaypoint(new Point(500, 200));
+		testcom.addWaypoint(new Point(500, 500));
+		testcom.addWaypoint(new Point(500, 200));
+		testcom.addWaypoint(new Point(500, 500));
+		testcom.addWaypoint(new Point(500, 200));
+		testcom.addWaypoint(new Point(500, 500));
+		testcom.addWaypoint(new Point(500, 200));
+		testcom.addWaypoint(new Point(500, 500));
+		testcom.addWaypoint(new Point(500, 200));
+		
 		testcom.setImageName("combatantSprite.png");
 		sharedgamestate.getGameobjects().add(testcom);
 		
