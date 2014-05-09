@@ -2,9 +2,12 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="junit"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/CS320_Derby"/>
 	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/CS320_Derby"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/jackson-annotations-2.2.3.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/jackson-core-2.2.3.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/jackson-databind-2.2.3.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

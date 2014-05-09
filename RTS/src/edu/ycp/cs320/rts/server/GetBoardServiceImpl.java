@@ -8,18 +8,12 @@ import javax.servlet.ServletException;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import edu.ycp.cs320.rts.client.GetBoardService;
-import edu.ycp.cs320.rts.server.control.AddChangesToGameState;
 import edu.ycp.cs320.rts.server.control.AddUser;
 import edu.ycp.cs320.rts.server.control.ClientChannel;
 import edu.ycp.cs320.rts.server.control.GameStateManager;
 import edu.ycp.cs320.rts.server.control.GetGamestate;
-import edu.ycp.cs320.rts.server.control.SetGameState;
 import edu.ycp.cs320.rts.server.control.VerifyLogin;
-import edu.ycp.cs320.rts.shared.BuildRequest;
 import edu.ycp.cs320.rts.shared.GameState;
-import edu.ycp.cs320.rts.shared.Point;
-import edu.ycp.cs320.rts.shared.Structure;
-import edu.ycp.cs320.server.persist.Database;
 import edu.ycp.cs320.rts.shared.UserData;
 import edu.ycp.cs320.server.persist.BCrypt;
 @SuppressWarnings("serial")

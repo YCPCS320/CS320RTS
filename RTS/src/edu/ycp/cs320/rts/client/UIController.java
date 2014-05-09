@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.TreeMap;
 
 import com.google.gwt.core.shared.GWT;
+import com.google.gwt.user.client.Window;
 
 import edu.ycp.cs320.rts.shared.Attackable;
 import edu.ycp.cs320.rts.shared.CanAttack;
@@ -59,14 +60,14 @@ public class UIController {
 			for(GameObject obj: state.getGameobjects()){
 				if(targetObject.checkBounds(click)){
 					this.targetObject=obj;
-					GWT.log("Object id:" + targetObject.getId() + " targeted by object id:" + selectedObject.getId() + ".");
+					Window.alert("Object id:" + targetObject.getId() + " targeted by object id:" + selectedObject.getId() + ".");
 				}
 			}
 			if(this.targetObject!=null){//if no target was made, target must be a point for move order	
 					if(selectedObject instanceof Movable){
 						//GIVE MOVE ORDER
 						((Movable) selectedObject).addWaypoint(click);
-						GWT.log("Move order received by object id:" + selectedObject.getId() + ".");
+						Window.alert("Move order received by object id:" + selectedObject.getId() + ".");
 						return 0;
 					}
 					else{

@@ -62,13 +62,11 @@ public class HandleGameRequests {
 					Point buildPoint = br.getBuildpoint();
 					int size = masterGamestate.getGameobjects().size();		// Get a new unique id
 					int id = size;
-					Combatant combatantToBuild = new Combatant(id, Userid, new Point(20, 20), buildPoint, 1,1,1,1,1,1);
+					Combatant combatantToBuild = new Combatant(id, Userid, new Point(30, 30), buildPoint, 1,1,1,1,1,1);
 					combatantToBuild.setImageName("combatantSprite.png");
 					masterGamestate.getGameobjects().add(combatantToBuild);	// Make changes directly
 					
-					//for(GameObject g: masterGamestate.getGameobjects()){
-						
-					//}
+
 				}
 			}
 			
