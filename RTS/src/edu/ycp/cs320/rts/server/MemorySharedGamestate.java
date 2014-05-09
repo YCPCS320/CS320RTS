@@ -3,6 +3,7 @@
  */
 package edu.ycp.cs320.rts.server;
 
+import edu.ycp.cs320.rts.shared.BuildRequest;
 import edu.ycp.cs320.rts.shared.Combatant;
 import edu.ycp.cs320.rts.shared.GameState;
 import edu.ycp.cs320.rts.shared.Point;
@@ -18,7 +19,7 @@ public class MemorySharedGamestate implements ISharedGamestate{
 	private GameState sharedgamestate;
 	public MemorySharedGamestate(){
 		sharedgamestate = new GameState();
-		Combatant testcom = new Combatant();
+/*		Combatant testcom = new Combatant();
 		testcom.setPosition(new Point(10, 20));
 		testcom.addWaypoint(new Point(50, 50));
 		testcom.addWaypoint(new Point(5, 5));
@@ -39,7 +40,9 @@ public class MemorySharedGamestate implements ISharedGamestate{
 		testcom.addWaypoint(new Point(500, 200));
 		
 		testcom.setImageName("combatantSprite.png");
-		sharedgamestate.getGameobjects().add(testcom);
+		sharedgamestate.getGameobjects().add(testcom);*/
+		
+		sharedgamestate.addBuildRequest(new BuildRequest(2, new Point(50, 50)));
 		
 	}
 	

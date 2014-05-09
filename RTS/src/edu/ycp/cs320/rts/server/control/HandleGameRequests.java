@@ -57,12 +57,18 @@ public class HandleGameRequests {
 					}
 				}
 				if (validPos) {
+					
 					int Userid = br.getUserId();
 					Point buildPoint = br.getBuildpoint();
 					int size = masterGamestate.getGameobjects().size();		// Get a new unique id
 					int id = size;
-					Combatant combatantToBuild = new Combatant(id, Userid, new Point(), buildPoint, 1,1,1,1,1,1);
+					Combatant combatantToBuild = new Combatant(id, Userid, new Point(20, 20), buildPoint, 1,1,1,1,1,1);
+					combatantToBuild.setImageName("combatantSprite.png");
 					masterGamestate.getGameobjects().add(combatantToBuild);	// Make changes directly
+					
+					//for(GameObject g: masterGamestate.getGameobjects()){
+						
+					//}
 				}
 			}
 			

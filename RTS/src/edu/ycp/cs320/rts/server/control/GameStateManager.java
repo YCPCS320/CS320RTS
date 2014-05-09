@@ -35,7 +35,7 @@ public class GameStateManager {
 				try {
 					Thread.sleep(UPDATE_INTERVAL_MS);
 					
-					List<GameState> proposedUpdates = new ArrayList<GameState>();
+					ArrayList<GameState> proposedUpdates = new ArrayList<GameState>();
 					
 					synchronized (lock) {
 						for (ClientChannel channel : channelList) {
@@ -46,8 +46,8 @@ public class GameStateManager {
 							}
 						}
 						
-						// adds proposed changes to gamestate
-						AddChangesToGameState changer = new AddChangesToGameState();
+						HandleGameRequests merger = new HandleGameRequests();
+						sharedGameState = merger.handleGameRequests(sharedGameState, proposedUpdates);
 						for(GameState s: proposedUpdates){
 							//changer.addChangesToGameState(s);
 						}
