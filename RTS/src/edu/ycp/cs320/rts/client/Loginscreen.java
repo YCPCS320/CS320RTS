@@ -45,7 +45,7 @@ public class Loginscreen implements EntryPoint {
 			
 		};
 		
-		final AsyncCallback<Boolean> callbacklogin = new AsyncCallback<Boolean>() {
+		final AsyncCallback<Integer> callbacklogin = new AsyncCallback<Integer>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
@@ -55,11 +55,11 @@ public class Loginscreen implements EntryPoint {
 			}
 
 			@Override
-			public void onSuccess(Boolean result) {
-				if(result){
+			public void onSuccess(Integer result) {
+				if(result != 0){
 					Window.alert("Login Successful");
 					RootPanel.get().clear();
-					RTS maingame = new RTS();
+					RTS maingame = new RTS(result);
 					maingame.updateGameState();
 				}
 				

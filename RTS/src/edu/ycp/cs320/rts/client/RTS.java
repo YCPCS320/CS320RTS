@@ -3,9 +3,11 @@ package edu.ycp.cs320.rts.client;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
+import edu.ycp.cs320.rts.shared.BuildRequest;
 import edu.ycp.cs320.rts.shared.GameObject;
 import edu.ycp.cs320.rts.shared.GameState;
 import edu.ycp.cs320.rts.shared.GameStateUpdater;
+import edu.ycp.cs320.rts.shared.Point;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Timer;
@@ -29,12 +31,12 @@ public class RTS {
 	private GameView view;
 	private GameState state;
 	private GameStateUpdater smoother;
-	
+	private int playerid;
 	/**
 	 * 
 	 */
-	public RTS(){
-
+	public RTS(int playeridfromserv){
+		playerid = playeridfromserv;
 		// load sprites
 		String combatantSpriteUrl = GWT.getModuleBaseForStaticFiles()
 				+ "combatantSprite.png";
@@ -148,7 +150,7 @@ public class RTS {
 			}
 		};
 
-
+		state.addBuildRequest(new BuildRequest(playerid, new Point(200, 200)));
 		boardservice.exchangeGameState(state, callback);
 		
 	   

@@ -4,10 +4,8 @@
 package edu.ycp.cs320.rts.server;
 
 import edu.ycp.cs320.rts.shared.BuildRequest;
-import edu.ycp.cs320.rts.shared.Combatant;
 import edu.ycp.cs320.rts.shared.GameState;
 import edu.ycp.cs320.rts.shared.Point;
-import edu.ycp.cs320.rts.shared.Structure;
 
 /**
  * @author dan

@@ -3,11 +3,8 @@ package edu.ycp.cs320.rts.server.control;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.ycp.cs320.rts.server.SharedGamestate;
-import edu.ycp.cs320.rts.shared.BuildRequest;
 import edu.ycp.cs320.rts.shared.GameState;
 import edu.ycp.cs320.rts.shared.GameStateUpdater;
-import edu.ycp.cs320.rts.shared.Request;
 
 /**
  * Manage shared {@link GameState} by allowing multiple clients
@@ -16,7 +13,7 @@ import edu.ycp.cs320.rts.shared.Request;
  */
 public class GameStateManager {
 	public static final int UPDATE_INTERVAL_MS =  100; // update shared game state approximately every 100ms 
-
+	private int numclients;
 	/**
 	 * Worker thread.  Periodically checks for proposed updates,
 	 * reconciles them, and posts updated games states back
@@ -48,15 +45,12 @@ public class GameStateManager {
 						
 						HandleGameRequests merger = new HandleGameRequests();
 						sharedGameState = merger.handleGameRequests(sharedGameState, proposedUpdates);
-						for(GameState s: proposedUpdates){
-							//changer.addChangesToGameState(s);
-						}
+						
 						
 						gameupdater.updateState();
 						
 						//TODO: handle change conflicts
 						
-						//TODO: turn changes requests into changes
 						
 						
 						// Distribute new shared game state to clients
@@ -90,6 +84,7 @@ public class GameStateManager {
 		this.lock = new Object(); // protects accesses to channelList
 		this.channelList = new ArrayList<ClientChannel>();
 		this.shutdownRequested = false;
+		numclients = 0;
 	}
 	
 	/**
@@ -101,6 +96,7 @@ public class GameStateManager {
 		synchronized (lock) {
 			ClientChannel channel = new ClientChannel();
 			channelList.add(channel);
+			numclients++;
 			return channel;
 		}
 	}
@@ -119,5 +115,10 @@ public class GameStateManager {
 	public void shutdown() {
 		shutdownRequested = true;
 		workerThread.interrupt();
+	}
+	
+	public int getnumclients() {
+		return numclients;
+		
 	}
 }

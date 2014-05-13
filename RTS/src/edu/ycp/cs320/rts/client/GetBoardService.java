@@ -18,7 +18,7 @@ import edu.ycp.cs320.rts.shared.*;
 public interface GetBoardService extends RemoteService {
 	public GameState exchangeGameState(GameState state);
 	
-	Boolean login(String username, String password);
+	Integer login(String username, String password);
 	Boolean newuser(String username, String password, String email);
 	
 }

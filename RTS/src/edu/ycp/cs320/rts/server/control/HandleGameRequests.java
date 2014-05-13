@@ -10,7 +10,6 @@ import edu.ycp.cs320.rts.shared.GameState;
 import edu.ycp.cs320.rts.shared.Interactable;
 import edu.ycp.cs320.rts.shared.MoveRequest;
 import edu.ycp.cs320.rts.shared.Point;
-import edu.ycp.cs320.rts.shared.Structure;
 import edu.ycp.cs320.rts.shared.Unit;
 
 public class HandleGameRequests {

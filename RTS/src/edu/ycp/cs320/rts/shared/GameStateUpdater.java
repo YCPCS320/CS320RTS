@@ -28,6 +28,9 @@ public class GameStateUpdater {
 			}
 			if(obj instanceof CanAttack){
 				CanAttack objcast = ((CanAttack) obj);
+				if(objcast.canAttack(System.currentTimeMillis())){
+					
+				}
 			}
 			if(obj instanceof Movable){
 				Movable objcast = ((Unit) obj);

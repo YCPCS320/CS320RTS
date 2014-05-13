@@ -69,15 +69,15 @@ public class GetBoardServiceImpl extends RemoteServiceServlet implements GetBoar
 		return state;
 	}
 
-	public Boolean login(String username, String password) {
+	public Integer login(String username, String password) {
 		VerifyLogin logi = new VerifyLogin();
 		String user = logi.verifyLogin(username, password);
 		if(user == null){
-			return false;
+			return 0;
 			
 		}
 		getThreadLocalRequest().getSession().setAttribute("username", user);
-		return true;
+		return manage.getnumclients()+1;
 	}
 
 	public Boolean newuser(String username, String password, String email) {
