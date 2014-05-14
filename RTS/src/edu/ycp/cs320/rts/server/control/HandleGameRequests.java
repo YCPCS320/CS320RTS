@@ -99,7 +99,9 @@ public class HandleGameRequests {
 			}
 		}
 		
-		
+		masterGamestate.getAttackRequests().clear();
+		masterGamestate.getBuildRequests().clear();
+		masterGamestate.getMoveRequests().clear();
 		return masterGamestate;
 	}
 
