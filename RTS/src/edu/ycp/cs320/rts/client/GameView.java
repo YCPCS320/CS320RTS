@@ -9,15 +9,20 @@ import com.google.gwt.dom.client.CanvasElement;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FocusPanel;
 import com.google.gwt.user.client.ui.Image;
 
 import edu.ycp.cs320.rts.shared.GameObject;
+import edu.ycp.cs320.rts.shared.GameState;
 import edu.ycp.cs320.rts.shared.Point;
 
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.DoubleClickEvent;
+import com.google.gwt.event.dom.client.DoubleClickHandler;
+import com.sun.java.swing.plaf.windows.resources.windows;
 
 /**
  * View for RTS model class.
@@ -38,6 +43,15 @@ public class GameView extends Composite {
 	private ArrayList<GameObject> list;
 	private Point mouseStart;
 	private UIController uIController; 
+	public UIController getuIController() {
+		return uIController;
+	}
+
+	public void setuIController(UIController uIController) {
+		this.uIController = uIController;
+	}
+
+	private GameState state;
 
 	/**
 	 * Constructor.
@@ -68,6 +82,15 @@ public class GameView extends Composite {
 				handleMouseClick(event);
 			}
 		});
+		canvas.addDoubleClickHandler(new DoubleClickHandler() {
+			
+			@Override
+			public void onDoubleClick(DoubleClickEvent event) {
+				Point click = new Point(event.getX(), event.getClientY());
+				uIController.moveallunitsto(click);
+				
+			}
+		});
 		canvas.setSize(WIDTH + "px", HEIGHT + "px");
 		canvas.setCoordinateSpaceWidth(WIDTH);
 		canvas.setCoordinateSpaceHeight(HEIGHT);
@@ -96,7 +119,7 @@ public class GameView extends Composite {
 		NativeEvent nativeEvent = event.getNativeEvent();
 		this.uIController.setGameList(list);
 		if(nativeEvent.getButton()==NativeEvent.BUTTON_LEFT){
-			this.uIController.determineSelect(mouseStart);		
+			this.uIController.determineSelect(mouseStart);	
 		}
 		if(nativeEvent.getButton()==NativeEvent.BUTTON_RIGHT){
 			this.uIController.determineAction(mouseStart);
@@ -170,5 +193,20 @@ public class GameView extends Composite {
 		}
 		// Copy buffer onto main canvas
 		ctx.drawImage((CanvasElement) buffer.getElement().cast(), 0, 0);
+	}
+
+	/**
+	 * @return the state
+	 */
+	public GameState getState() {
+		return state;
+	}
+
+	/**
+	 * @param state the state to set
+	 */
+	public void setState(GameState state) {
+		this.state = state;
+		uIController.setState(state);
 	}
 }

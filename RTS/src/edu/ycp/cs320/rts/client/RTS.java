@@ -57,11 +57,11 @@ public class RTS {
 
 		// Generate a new game view
 
-		view = new GameView();
-
+		
 		state = new GameState(new ArrayList<GameObject>(), new TreeMap<String, Integer>());
 		smoother = new GameStateUpdater(state);
-
+		view = new GameView();
+		view.setState(state);
 		view.setGameList(state.getGameobjects());
 
 		// more stuff
@@ -139,6 +139,14 @@ public class RTS {
 				GameState newstate =(GameState) result;
 				view.setGameList(newstate.getGameobjects());
 				state = result;
+				view.setState(state);
+				//loads pending requests to gamestate before sending them over the network
+				state.getBuildRequests().addAll(view.getuIController().getPendingbuilds());
+				view.getuIController().getPendingbuilds().clear();
+				state.getMoveRequests().addAll(view.getuIController().getPendingmoves());
+				view.getuIController().getPendingmoves().clear();
+				state.getAttackRequests().addAll(view.getuIController().getPendingattacks());
+				view.getuIController().getPendingattacks().clear();
 				updateGameState();
 				for(GameObject g: state.getGameobjects()){
 					/*
@@ -146,11 +154,12 @@ public class RTS {
 					GWT.log("y:" + g.getPosition().getY());
 					*/
 				}
+				
 
 			}
 		};
 
-		state.addBuildRequest(new BuildRequest(playerid, new Point(200, 200)));
+		//state.addBuildRequest(new BuildRequest(playerid, new Point(200, 200)));
 		boardservice.exchangeGameState(state, callback);
 		
 	   
